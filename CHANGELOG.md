@@ -1536,6 +1536,7 @@ By @MarijnS95 in [#6006](https://github.com/gfx-rs/wgpu/pull/6006).
 - Add base support for parsing `requires`, `enable`, and `diagnostic` directives. No extensions or diagnostic filters are yet supported, but diagnostics have improved dramatically. By @ErichDonGubler in [#6352](https://github.com/gfx-rs/wgpu/pull/6352), [#6424](https://github.com/gfx-rs/wgpu/pull/6424), [#6437](https://github.com/gfx-rs/wgpu/pull/6437).
 - Include error chain information as a message and notes in shader compilation messages. By @ErichDonGubler in [#6436](https://github.com/gfx-rs/wgpu/pull/6436).
 - Unify naga CLI error output with the format of shader compilation messages. By @ErichDonGubler in [#6436](https://github.com/gfx-rs/wgpu/pull/6436).
+- Support pipeline overrides in WGSL backend. By @cbbowen in [#6310](https://github.com/gfx-rs/wgpu/pull/6310).
 
 #### General
 
