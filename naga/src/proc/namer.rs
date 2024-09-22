@@ -51,6 +51,7 @@ impl ExternalTextureNameKey {
 #[derive(Debug, Eq, Hash, PartialEq)]
 pub enum NameKey {
     Constant(Handle<crate::Constant>),
+    Override(Handle<crate::Override>),
     GlobalVariable(Handle<crate::GlobalVariable>),
     Type(Handle<crate::Type>),
     StructMember(Handle<crate::Type>, u32),

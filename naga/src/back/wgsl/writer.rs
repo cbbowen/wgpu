@@ -135,12 +135,6 @@ impl<W: Write> Writer<W> {
     }
 
     pub fn write(&mut self, module: &Module, info: &valid::ModuleInfo) -> BackendResult {
-        if !module.overrides.is_empty() {
-            return Err(Error::Unimplemented(
-                "Pipeline constants are not yet supported for this back-end".to_string(),
-            ));
-        }
-
         self.reset(module);
 
         // Write all `enable` declarations
@@ -170,6 +164,14 @@ impl<W: Write> Writer<W> {
             if constants.peek().is_none() {
                 writeln!(self.out)?;
             }
+        }
+
+        // Write all overrides
+        if !module.overrides.is_empty() {
+            for (handle, _) in module.overrides.iter() {
+                self.write_override(module, handle)?;
+            }
+            writeln!(self.out)?;
         }
 
         // Write all globals
@@ -1185,6 +1187,9 @@ impl<W: Write> Writer<W> {
                     self.write_const_expression(module, constant.init, &module.global_expressions)?;
                 }
             }
+            Expression::Override(handle) => {
+                write!(self.out, "{}", self.names[&NameKey::Override(handle)])?;
+            }
             Expression::ZeroValue(ty) => {
                 self.write_type(module, ty)?;
                 write!(self.out, "()")?;
@@ -1767,6 +1772,33 @@ impl<W: Write> Writer<W> {
         let init = module.constants[handle].init;
         self.write_const_expression(module, init, &module.global_expressions)?;
         writeln!(self.out, ";")?;
+
+        Ok(())
+    }
+
+    /// Helper method used to write override declarations
+    ///
+    /// # Notes
+    /// Ends in a newline
+    fn write_override(
+        &mut self,
+        module: &Module,
+        handle: Handle<crate::Override>,
+    ) -> BackendResult {
+        let r#override = &module.overrides[handle];
+        let name = self.namer.call(r#override.name.as_deref().unwrap_or(""));
+        if let Some(id) = r#override.id {
+            write!(self.out, "@id({id}) ")?;
+        }
+        write!(self.out, "override {name}: ")?;
+        self.write_type(module, r#override.ty)?;
+        if let Some(init) = r#override.init {
+            write!(self.out, " = ")?;
+            self.write_const_expression(module, init)?;
+        }
+        writeln!(self.out, ";")?;
+
+        self.names.insert(NameKey::Override(handle), name);
 
         Ok(())
     }
