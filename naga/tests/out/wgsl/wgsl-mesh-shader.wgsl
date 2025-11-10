@@ -1,29 +1,29 @@
 enable wgpu_mesh_shader;
 
 struct TaskPayload {
-    colorMask: vec4<f32>,
-    visible: bool,
+    @align(32) colorMask: vec4<f32>,
+    @align(16) visible: bool,
 }
 
 struct VertexOutput {
-    @builtin(position) position: vec4<f32>,
-    @location(0) color: vec4<f32>,
+    @builtin(position) @align(32) position: vec4<f32>,
+    @location(0) @align(16) color: vec4<f32>,
 }
 
 struct PrimitiveOutput {
-    @builtin(triangle_indices) indices: vec3<u32>,
+    @builtin(triangle_indices) @align(32) indices: vec3<u32>,
     @builtin(cull_primitive) cull: bool,
-    @location(1) @per_primitive colorMask: vec4<f32>,
+    @location(1) @per_primitive @align(16) colorMask: vec4<f32>,
 }
 
 struct PrimitiveInput {
-    @location(1) @per_primitive colorMask: vec4<f32>,
+    @location(1) @per_primitive @align(16) colorMask: vec4<f32>,
 }
 
 struct MeshOutput {
-    @builtin(vertices) vertices: array<VertexOutput, 3>,
-    @builtin(primitives) primitives: array<PrimitiveOutput, 1>,
-    @builtin(vertex_count) vertex_count: u32,
+    @builtin(vertices) @align(16) vertices: array<VertexOutput, 3>,
+    @builtin(primitives) @align(32) primitives: array<PrimitiveOutput, 1>,
+    @builtin(vertex_count) @align(128) vertex_count: u32,
     @builtin(primitive_count) primitive_count: u32,
 }
 

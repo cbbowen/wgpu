@@ -1,5 +1,5 @@
 struct FragmentOutput {
-    @location(0) o_color: vec4<f32>,
+    @location(0) @align(16) o_color: vec4<f32>,
 }
 
 @id(0) override SPEC_CONST_BOOL: bool = true;

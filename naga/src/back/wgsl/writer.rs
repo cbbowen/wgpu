@@ -24,6 +24,7 @@ type BackendResult = Result<(), Error>;
 
 /// WGSL [attribute](https://gpuweb.github.io/gpuweb/wgsl/#attributes)
 enum Attribute {
+    Align(u32),
     Binding(u32),
     BuiltIn(crate::BuiltIn),
     Group(u32),
@@ -145,10 +146,10 @@ impl<W: Write> Writer<W> {
 
         // Write all structs
         for (handle, ty) in module.types.iter() {
-            if let TypeInner::Struct { ref members, .. } = ty.inner {
+            if let TypeInner::Struct { ref members, span } = ty.inner {
                 {
                     if !self.is_builtin_wgsl_struct(module, handle) {
-                        self.write_struct(module, handle, members)?;
+                        self.write_struct(module, handle, members, span)?;
                         writeln!(self.out)?;
                     }
                 }
@@ -518,6 +519,7 @@ impl<W: Write> Writer<W> {
                     write!(self.out, "@payload({payload_name}) ")?;
                 }
                 Attribute::PerPrimitive => write!(self.out, "@per_primitive ")?,
+                Attribute::Align(alignment) => write!(self.out, "@align({alignment}) ")?,
             };
         }
         Ok(())
@@ -538,6 +540,7 @@ impl<W: Write> Writer<W> {
         module: &Module,
         handle: Handle<crate::Type>,
         members: &[crate::StructMember],
+        span: u32,
     ) -> BackendResult {
         write!(self.out, "struct {}", self.names[&NameKey::Type(handle)])?;
         write!(self.out, " {{")?;
@@ -548,6 +551,18 @@ impl<W: Write> Writer<W> {
             if let Some(ref binding) = member.binding {
                 self.write_attributes(&map_binding_to_attribute(binding))?;
             }
+
+            // Determine an alignment based on the offset.
+            let aligned_value = if member.offset == 0 {
+                span
+            } else {
+                member.offset
+            };
+            let alignment = 1 << aligned_value.trailing_zeros();
+            if alignment >= 16 {
+                self.write_attributes(&[Attribute::Align(alignment)])?;
+            }
+
             // Write struct member name and type
             let member_name = &self.names[&NameKey::StructMember(handle, index as u32)];
             write!(self.out, "{member_name}: ")?;

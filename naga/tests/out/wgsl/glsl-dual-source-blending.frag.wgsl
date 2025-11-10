@@ -1,8 +1,8 @@
 enable dual_source_blending;
 
 struct FragmentOutput {
-    @location(0) @blend_src(0) output0_: vec4<f32>,
-    @location(0) @blend_src(1) output1_: vec4<f32>,
+    @location(0) @blend_src(0) @align(32) output0_: vec4<f32>,
+    @location(0) @blend_src(1) @align(16) output1_: vec4<f32>,
 }
 
 var<private> output0_: vec4<f32>;

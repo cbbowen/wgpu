@@ -1,6 +1,6 @@
 struct VertexOutput {
-    @builtin(position) @invariant position: vec4<f32>,
-    @location(1) _varying: f32,
+    @builtin(position) @invariant @align(32) position: vec4<f32>,
+    @location(1) @align(16) _varying: f32,
 }
 
 struct FragmentOutput {

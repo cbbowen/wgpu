@@ -1,9 +1,9 @@
 struct Camera {
-    ViewProj: mat4x4<f32>,
+    @align(64) ViewProj: mat4x4<f32>,
 }
 
 struct Transform {
-    Model: mat4x4<f32>,
+    @align(64) Model: mat4x4<f32>,
 }
 
 struct Sprite_size {

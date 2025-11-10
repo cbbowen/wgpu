@@ -1,14 +1,14 @@
 struct Globals {
-    view_matrix: mat4x4<f32>,
+    @align(64) view_matrix: mat4x4<f32>,
 }
 
 struct VertexPushConstants {
-    world_matrix: mat4x4<f32>,
+    @align(64) world_matrix: mat4x4<f32>,
 }
 
 struct VertexOutput {
-    @location(0) frag_color: vec4<f32>,
-    @builtin(position) gl_Position: vec4<f32>,
+    @location(0) @align(32) frag_color: vec4<f32>,
+    @builtin(position) @align(16) gl_Position: vec4<f32>,
 }
 
 @group(0) @binding(0) 

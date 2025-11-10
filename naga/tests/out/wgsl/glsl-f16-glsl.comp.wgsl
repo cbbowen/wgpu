@@ -4,23 +4,23 @@ struct A {
     a_1_: f16,
     a_vec2_: vec2<f16>,
     a_vec3_: vec3<f16>,
-    a_vec4_: vec4<f16>,
+    @align(16) a_vec4_: vec4<f16>,
 }
 
 struct B {
-    b_1_: f16,
+    @align(16) b_1_: f16,
     b_vec2_: vec2<f16>,
     b_vec3_: vec3<f16>,
-    b_vec4_: vec4<f16>,
+    @align(16) b_vec4_: vec4<f16>,
     b_mat2_: mat2x2<f16>,
-    b_mat2x3_: mat2x3<f16>,
-    b_mat2x4_: mat2x4<f16>,
-    b_mat3x2_: mat3x2<f16>,
-    b_mat3_: mat3x3<f16>,
+    @align(32) b_mat2x3_: mat2x3<f16>,
+    @align(16) b_mat2x4_: mat2x4<f16>,
+    @align(64) b_mat3x2_: mat3x2<f16>,
+    @align(16) b_mat3_: mat3x3<f16>,
     b_mat3x4_: mat3x4<f16>,
-    b_mat4x2_: mat4x2<f16>,
-    b_mat4x3_: mat4x3<f16>,
-    b_mat4_: mat4x4<f16>,
+    @align(128) b_mat4x2_: mat4x2<f16>,
+    @align(16) b_mat4x3_: mat4x3<f16>,
+    @align(16) b_mat4_: mat4x4<f16>,
 }
 
 @group(0) @binding(0) 

@@ -1,6 +1,6 @@
 struct OurVertexShaderOutput {
-    @builtin(position) position: vec4<f32>,
-    @location(0) texcoord: vec2<f32>,
+    @builtin(position) @align(32) position: vec4<f32>,
+    @location(0) @align(16) texcoord: vec2<f32>,
 }
 
 @vertex 

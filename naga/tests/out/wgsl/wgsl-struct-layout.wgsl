@@ -1,11 +1,11 @@
 struct NoPadding {
-    @location(0) v3_: vec3<f32>,
+    @location(0) @align(16) v3_: vec3<f32>,
     @location(1) f3_: f32,
 }
 
 struct NeedsPadding {
-    @location(0) f3_forces_padding: f32,
-    @location(1) v3_needs_padding: vec3<f32>,
+    @location(0) @align(32) f3_forces_padding: f32,
+    @location(1) @align(16) v3_needs_padding: vec3<f32>,
     @location(2) f3_: f32,
 }
 

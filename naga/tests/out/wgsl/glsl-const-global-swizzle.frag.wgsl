@@ -1,5 +1,5 @@
 struct FragmentOutput {
-    @location(0) o_Target: vec4<f32>,
+    @location(0) @align(16) o_Target: vec4<f32>,
 }
 
 const blank: vec2<f32> = vec2<f32>(0f, 1f);

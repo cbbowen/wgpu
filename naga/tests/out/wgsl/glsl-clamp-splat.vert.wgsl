@@ -1,5 +1,5 @@
 struct VertexOutput {
-    @builtin(position) gl_Position: vec4<f32>,
+    @builtin(position) @align(16) gl_Position: vec4<f32>,
 }
 
 var<private> a_pos_1: vec2<f32>;

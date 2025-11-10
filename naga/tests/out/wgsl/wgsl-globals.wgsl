@@ -1,5 +1,5 @@
 struct FooStruct {
-    v3_: vec3<f32>,
+    @align(16) v3_: vec3<f32>,
     v1_: f32,
 }
 

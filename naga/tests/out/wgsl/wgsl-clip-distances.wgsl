@@ -1,8 +1,8 @@
 enable clip_distances;
 
 struct VertexOutput {
-    @builtin(position) position: vec4<f32>,
-    @builtin(clip_distances) clip_distances: array<f32, 1>,
+    @builtin(position) @align(32) position: vec4<f32>,
+    @builtin(clip_distances) @align(16) clip_distances: array<f32, 1>,
 }
 
 @vertex 

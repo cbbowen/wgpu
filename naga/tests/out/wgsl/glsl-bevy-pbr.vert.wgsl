@@ -1,17 +1,17 @@
 struct CameraViewProj {
-    ViewProj: mat4x4<f32>,
+    @align(64) ViewProj: mat4x4<f32>,
 }
 
 struct Transform {
-    Model: mat4x4<f32>,
+    @align(64) Model: mat4x4<f32>,
 }
 
 struct VertexOutput {
-    @location(0) v_WorldPosition: vec3<f32>,
+    @location(0) @align(64) v_WorldPosition: vec3<f32>,
     @location(1) v_WorldNormal: vec3<f32>,
     @location(2) v_Uv: vec2<f32>,
-    @location(3) v_WorldTangent: vec4<f32>,
-    @builtin(position) gl_Position: vec4<f32>,
+    @location(3) @align(32) v_WorldTangent: vec4<f32>,
+    @builtin(position) @align(16) gl_Position: vec4<f32>,
 }
 
 var<private> Vertex_Position_1: vec3<f32>;

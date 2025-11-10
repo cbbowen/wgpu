@@ -1,6 +1,6 @@
 struct WStruct {
     arr: array<u32, 512>,
-    atom: atomic<i32>,
+    @align(2048) atom: atomic<i32>,
     atom_arr: array<array<atomic<i32>, 8>, 8>,
 }
 

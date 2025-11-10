@@ -5,17 +5,17 @@ struct TaskPayload {
 }
 
 struct VertexOutput {
-    @builtin(position) position: vec4<f32>,
+    @builtin(position) @align(16) position: vec4<f32>,
 }
 
 struct PrimitiveOutput {
-    @builtin(triangle_indices) indices: vec3<u32>,
+    @builtin(triangle_indices) @align(16) indices: vec3<u32>,
 }
 
 struct MeshOutput {
-    @builtin(vertices) vertices: array<VertexOutput, 3>,
-    @builtin(primitives) primitives: array<PrimitiveOutput, 1>,
-    @builtin(vertex_count) vertex_count: u32,
+    @builtin(vertices) @align(16) vertices: array<VertexOutput, 3>,
+    @builtin(primitives) @align(16) primitives: array<PrimitiveOutput, 1>,
+    @builtin(vertex_count) @align(64) vertex_count: u32,
     @builtin(primitive_count) primitive_count: u32,
 }
 

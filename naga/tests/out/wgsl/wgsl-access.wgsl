@@ -1,6 +1,6 @@
 struct GlobalConst {
-    a: u32,
-    b: vec3<u32>,
+    @align(32) a: u32,
+    @align(16) b: vec3<u32>,
     c: i32,
 }
 
@@ -9,12 +9,12 @@ struct AlignedWrapper {
 }
 
 struct Bar {
-    _matrix: mat4x3<f32>,
-    matrix_array: array<mat2x2<f32>, 2>,
-    atom: atomic<i32>,
+    @align(16) _matrix: mat4x3<f32>,
+    @align(64) matrix_array: array<mat2x2<f32>, 2>,
+    @align(32) atom: atomic<i32>,
     atom_arr: array<atomic<i32>, 10>,
-    arr: array<vec2<u32>, 2>,
-    data: array<AlignedWrapper>,
+    @align(16) arr: array<vec2<u32>, 2>,
+    @align(32) data: array<AlignedWrapper>,
 }
 
 struct Baz {
@@ -22,7 +22,7 @@ struct Baz {
 }
 
 struct MatCx2InArray {
-    am: array<mat4x2<f32>, 2>,
+    @align(64) am: array<mat4x2<f32>, 2>,
 }
 
 struct AssignToMember {

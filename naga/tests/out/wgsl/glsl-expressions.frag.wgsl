@@ -7,11 +7,11 @@ struct a_buf {
 }
 
 struct TestStruct {
-    array_: array<vec4<u32>, 2>,
+    @align(32) array_: array<vec4<u32>, 2>,
 }
 
 struct FragmentOutput {
-    @location(0) o_color: vec4<f32>,
+    @location(0) @align(16) o_color: vec4<f32>,
 }
 
 const strct: TestStruct = TestStruct(array<vec4<u32>, 2>(vec4(0u), vec4(1u)));

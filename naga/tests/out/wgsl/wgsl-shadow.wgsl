@@ -1,23 +1,23 @@
 struct Globals {
-    view_proj: mat4x4<f32>,
-    num_lights: vec4<u32>,
+    @align(16) view_proj: mat4x4<f32>,
+    @align(64) num_lights: vec4<u32>,
 }
 
 struct Entity {
-    world: mat4x4<f32>,
-    color: vec4<f32>,
+    @align(16) world: mat4x4<f32>,
+    @align(64) color: vec4<f32>,
 }
 
 struct VertexOutput {
-    @builtin(position) proj_position: vec4<f32>,
-    @location(0) world_normal: vec3<f32>,
-    @location(1) world_position: vec4<f32>,
+    @builtin(position) @align(16) proj_position: vec4<f32>,
+    @location(0) @align(16) world_normal: vec3<f32>,
+    @location(1) @align(32) world_position: vec4<f32>,
 }
 
 struct Light {
-    proj: mat4x4<f32>,
-    pos: vec4<f32>,
-    color: vec4<f32>,
+    @align(32) proj: mat4x4<f32>,
+    @align(64) pos: vec4<f32>,
+    @align(16) color: vec4<f32>,
 }
 
 const c_ambient: vec3<f32> = vec3<f32>(0.05f, 0.05f, 0.05f);

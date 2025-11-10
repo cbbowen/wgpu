@@ -5,7 +5,7 @@ struct TaskPayload {
 }
 
 struct VertexOutput {
-    @builtin(position) position: vec4<f32>,
+    @builtin(position) @align(16) position: vec4<f32>,
 }
 
 struct PrimitiveOutput {
@@ -13,8 +13,8 @@ struct PrimitiveOutput {
 }
 
 struct MeshOutput {
-    @builtin(vertices) vertices: array<VertexOutput, 2>,
-    @builtin(primitives) primitives: array<PrimitiveOutput, 1>,
+    @builtin(vertices) @align(16) vertices: array<VertexOutput, 2>,
+    @builtin(primitives) @align(32) primitives: array<PrimitiveOutput, 1>,
     @builtin(vertex_count) vertex_count: u32,
     @builtin(primitive_count) primitive_count: u32,
 }

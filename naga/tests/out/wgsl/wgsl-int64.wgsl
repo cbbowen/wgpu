@@ -1,21 +1,21 @@
 struct UniformCompatible {
-    val_u32_: u32,
+    @align(256) val_u32_: u32,
     val_i32_: i32,
     val_f32_: f32,
-    val_u64_: u64,
-    val_u64_2_: vec2<u64>,
-    val_u64_3_: vec3<u64>,
-    val_u64_4_: vec4<u64>,
-    val_i64_: i64,
-    val_i64_2_: vec2<i64>,
-    val_i64_3_: vec3<i64>,
-    val_i64_4_: vec4<i64>,
-    final_value: u64,
+    @align(16) val_u64_: u64,
+    @align(32) val_u64_2_: vec2<u64>,
+    @align(64) val_u64_3_: vec3<u64>,
+    @align(32) val_u64_4_: vec4<u64>,
+    @align(128) val_i64_: i64,
+    @align(16) val_i64_2_: vec2<i64>,
+    @align(32) val_i64_3_: vec3<i64>,
+    @align(64) val_i64_4_: vec4<i64>,
+    @align(32) final_value: u64,
 }
 
 struct StorageCompatible {
-    val_u64_array_2_: array<u64, 2>,
-    val_i64_array_2_: array<i64, 2>,
+    @align(32) val_u64_array_2_: array<u64, 2>,
+    @align(16) val_i64_array_2_: array<i64, 2>,
 }
 
 const constant_variable: u64 = 20lu;

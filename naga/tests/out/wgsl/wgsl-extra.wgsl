@@ -1,11 +1,11 @@
 struct ImmediateData {
-    index: u32,
+    @align(16) index: u32,
     double: vec2<f32>,
 }
 
 struct FragmentIn {
-    @location(0) color: vec4<f32>,
-    @builtin(primitive_index) primitive_index: u32,
+    @location(0) @align(32) color: vec4<f32>,
+    @builtin(primitive_index) @align(16) primitive_index: u32,
 }
 
 var<immediate> im: ImmediateData;

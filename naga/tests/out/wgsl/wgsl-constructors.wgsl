@@ -1,6 +1,6 @@
 struct Foo {
-    a: vec4<f32>,
-    b: i32,
+    @align(32) a: vec4<f32>,
+    @align(16) b: i32,
 }
 
 const const1_: vec3<f32> = vec3(0f);

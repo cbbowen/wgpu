@@ -1,6 +1,6 @@
 struct VertexOutput {
-    @location(0) uv: vec2<f32>,
-    @builtin(position) position: vec4<f32>,
+    @location(0) @align(32) uv: vec2<f32>,
+    @builtin(position) @align(16) position: vec4<f32>,
 }
 
 const c_scale: f32 = 1.2f;

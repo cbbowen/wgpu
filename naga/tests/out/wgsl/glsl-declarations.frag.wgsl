@@ -1,10 +1,10 @@
 struct VertexData {
-    position: vec2<f32>,
+    @align(16) position: vec2<f32>,
     a: vec2<f32>,
 }
 
 struct FragmentData {
-    position: vec2<f32>,
+    @align(16) position: vec2<f32>,
     a: vec2<f32>,
 }
 
@@ -14,20 +14,20 @@ struct TestStruct {
 }
 
 struct LightScatteringParams {
-    BetaRay: f32,
-    BetaMie: array<f32, 3>,
-    HGg: f32,
-    DistanceMul: array<f32, 4>,
-    BlendCoeff: f32,
-    SunDirection: vec3<f32>,
-    SunColor: vec3<f32>,
+    @align(64) BetaRay: f32,
+    @align(16) BetaMie: array<f32, 3>,
+    @align(64) HGg: f32,
+    @align(16) DistanceMul: array<f32, 4>,
+    @align(16) BlendCoeff: f32,
+    @align(32) SunDirection: vec3<f32>,
+    @align(16) SunColor: vec3<f32>,
 }
 
 struct FragmentOutput {
-    @location(0) position: vec2<f32>,
+    @location(0) @align(16) position: vec2<f32>,
     @location(1) a: vec2<f32>,
-    @location(2) out_array: vec4<f32>,
-    @location(3) out_array_1: vec4<f32>,
+    @location(2) @align(16) out_array: vec4<f32>,
+    @location(3) @align(32) out_array_1: vec4<f32>,
 }
 
 var<private> vert: VertexData;
